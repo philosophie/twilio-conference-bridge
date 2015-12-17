@@ -8,9 +8,7 @@ post '/incoming' do
 
   Twilio::TwiML::Response.new do |r|
     r.Gather action: '/conferences' do
-      r.Say 'Hello. You\'ve reached Philosophie. Please enter your room number ' \
-            'followed by the pound key.',
-            voice: 'woman'
+      r.Play ENV['WELCOME_MESSAGE_URL']
     end
   end.text
 end
