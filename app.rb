@@ -17,8 +17,14 @@ post '/conferences' do
   content_type 'text/xml'
 
   Twilio::TwiML::Response.new do |r|
+    code = params[:Digits]
+    pronounceable_code = code.to_s.each_char.to_a.join(' ')
+
+    r.Say "You entered #{pronounceable_code}. You will now join the conference.",
+          voice: 'woman'
+
     r.Dial do
-      r.Conference params[:Digits]
+      r.Conference code
     end
   end.text
 end
